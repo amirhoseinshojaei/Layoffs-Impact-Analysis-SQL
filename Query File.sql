@@ -151,5 +151,165 @@ WHERE
 
 -- Step2 : Standardizing
 
+SELECT 
+	DISTINCT (company),
+    TRIM(company)
+FROM
+	layoffs_staging2
+;
+
+UPDATE layoffs_staging2
+SET company = TRIM(company)
+;
+
+SELECT *,
+	CONCAT(UPPER(SUBSTRING(location,1,1), LOWER(SUBSTRING(location,2)))) AS formatted_location
+FROM
+	layoffs_staging2
+;
+
+SELECT *, 
+       CONCAT(
+           UPPER(SUBSTRING(location, 1, 1)), 
+           LOWER(SUBSTRING(location, 2, CHAR_LENGTH(location) - 1))
+       ) AS formatted_location
+FROM layoffs_staging2
+;
+
+UPDATE layoffs_staging2
+SET location =  CONCAT(
+           UPPER(SUBSTRING(location, 1, 1)), 
+           LOWER(SUBSTRING(location, 2, CHAR_LENGTH(location) - 1))
+       )
+;
+
+UPDATE layoffs_staging2
+SET location = TRIM(location)
+;
+
+SELECT 
+	DISTINCT(industry)
+FROM
+	layoffs_staging2
+ORDER BY 1 ASC
+;
+
+
+SELECT *
+FROM
+	layoffs_staging2
+WHERE 
+	industry LIKE 'Crypto%'
+;
+
+
+SELECT 
+	COUNT(*)
+FROM
+	layoffs_staging2
+WHERE 
+	industry LIKE 'Crypto'
+;
+
+SELECT 
+	COUNT(*)
+FROM
+	layoffs_staging2
+WHERE 
+	industry LIKE 'Crypto Currency'
+;
+
+SELECT 
+	COUNT(*)
+FROM
+	layoffs_staging2
+WHERE 
+	industry LIKE 'CryptoCurrency'
+;
+
+UPDATE layoffs_staging2
+SET industry = 'Crypto'
+WHERE
+	industry LIKE 'Crypto%'
+;
+
+
+UPDATE layoffs_staging2
+SET industry = TRIM(industry)
+;
+
+
+SELECT *
+FROM
+	layoffs_staging2
+;
+
+
+SELECT 
+	DISTINCT(stage)
+FROM
+	layoffs_staging2
+;
+
+
+UPDATE layoffs_staging2
+SET stage = TRIM(stage)
+;
+
+SELECT 
+	DISTINCT(country)
+FROM
+	layoffs_staging2
+ORDER BY 1 ASC
+;
+
+SELECT 
+	COUNT(*)
+FROM
+	layoffs_staging
+WHERE
+	country LIKE 'United States.'
+;
+
+UPDATE layoffs_staging2
+SET country = 'United States'
+WHERE
+	country LIKE 'United States%'
+;
+
+
+SELECT 
+	DISTINCT(country),
+    TRIM(TRAILING '.' FROM country)
+FROM
+	layoffs_staging2
+ORDER BY 1
+;
+
+SELECT 
+	COUNT(*)
+FROM
+	layoffs_staging
+WHERE
+	country LIKE '%.'
+;
+
+UPDATE layoffs_staging2
+SET country = TRIM(TRAILING '.' FROM country)
+WHERE country LIKE 'United States%'
+;
+
+SELECT *
+FROM
+	layoffs_staging2
+WHERE
+	country LIKE 'United States.'
+;
+
+UPDATE layoffs_staging2
+SET country = 'United States'
+WHERE
+	country = 'United States.'
+;
 
 
