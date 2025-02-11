@@ -749,3 +749,50 @@ SELECT *
 FROM
 	layoffs_staging_finally
 ;
+
+-- Update the 'continent' column based on the 'country' value.
+-- This query categorizes countries into their respective continents:
+-- Asia, North America, Europe, South America, or 'Other' for countries not listed.
+
+SELECT 
+	DISTINCT(country)
+FROM
+	layoffs_staging_finally
+ORDER BY 1
+;
+
+SELECT 
+	country,
+    CASE
+		WHEN country IN ('India', 'China', 'Japan', 'South Korea', 'Pakistan', 'Hong Kong','China',
+        'Indonesia','Israel','Malaysia','Thailand','Turkey','Vietnam') THEN 'Asia'
+        WHEN country IN ('Canada','United States','Mexico') THEN 'North America'
+        WHEN country IN ('Argentina','Brazil', 'Chile','Colombia' ) THEN 'South America'
+        WHEN country IN ('Seychelles', 'Senegal', 'Nigeria','Kenya','Egypt') THEN 'Africa'
+        WHEN country IN ('Australia','New Zealand') THEN ' Oceania'
+        ELSE 'Europe'
+	end as continent
+FROM 
+	layoffs_staging_finally
+;
+
+ALTER TABLE layoffs_staging_finally
+ADD COLUMN continent VARCHAR(50)
+;
+
+UPDATE layoffs_staging_finally
+SET continent =  CASE
+		WHEN country IN ('India', 'China', 'Japan', 'South Korea', 'Pakistan', 'Hong Kong','China',
+        'Indonesia','Israel','Malaysia','Thailand','Turkey','Vietnam') THEN 'Asia'
+        WHEN country IN ('Canada','United States','Mexico') THEN 'North America'
+        WHEN country IN ('Argentina','Brazil', 'Chile','Colombia' ) THEN 'South America'
+        WHEN country IN ('Seychelles', 'Senegal', 'Nigeria','Kenya','Egypt') THEN 'Africa'
+        WHEN country IN ('Australia','New Zealand') THEN ' Oceania'
+        ELSE 'Europe'
+	end
+;
+
+SELECT *
+FROM
+	layoffs_staging_finally
+;
