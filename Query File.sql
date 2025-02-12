@@ -796,3 +796,14 @@ SELECT *
 FROM
 	layoffs_staging_finally
 ;
+
+DELETE FROM layoffs_staging_finally
+WHERE
+	company IS NULL OR location IS NULL OR total_laid_off IS NULL OR percentage_laid_off IS NULL 
+    OR `date` IS NULL OR stage IS NULL OR country IS NULL OR funds_raised_millions IS NULL
+;
+
+select *
+from
+	layoffs_staging_finally
+;
