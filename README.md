@@ -1,4 +1,3 @@
-```markdown
 # Layoffs Impact Analysis with SQL
 
 ## 📌 Project Overview
@@ -34,10 +33,6 @@ The **Layoffs Impact Analysis with SQL** project is an open-source data analysis
 1. Clone the repository:
    ```sh
    git clone https://github.com/amirhoseinshojaei/Layoffs-Impact-Analysis-SQL.git
-   ```
-2. Import the dataset into your SQL database.
-3. Run the SQL scripts for data cleaning and analysis.
-4. Use visualization tools to interpret the results.
 
 ## 📌 Contribution
 This project is open-source, and contributions are welcome! Feel free to fork the repository, suggest improvements, or add new queries for deeper insights.
